@@ -103,7 +103,9 @@ export function BookEditor({ book, pageIndex = 0 }: { book: Book; pageIndex?: nu
         })
         promptParts.push("Current page:")
         promptParts.push(captionText)
-        promptParts.push("Illustrate the current page scene in a consistent style.")
+        promptParts.push(
+          "Illustrate the current page scene in a consistent style. Do not include any text or captions in the image."
+        )
         prompt = promptParts.join("\n")
       }
 
