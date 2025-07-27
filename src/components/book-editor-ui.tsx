@@ -26,6 +26,7 @@ import {
   getValue,
   isLoading,
 } from "@/lib/async-data"
+import { createImagePrompt } from "@/lib/create-image-prompt"
 import { updateBookOnline } from "@/lib/share-book-online"
 import { upsertBook } from "@/lib/storage"
 import { Book } from "@/lib/types"
@@ -92,22 +93,7 @@ export function BookEditor({ book, pageIndex = 0 }: { book: Book; pageIndex?: nu
         .filter((text) => text.length > 0)
         .slice(-3)
 
-      let prompt: string = captionText
-      // Add previous captions to the prompt if available
-      if (previousCaptions.length > 0) {
-        const promptParts: string[] = []
-        promptParts.push("Previous pages:")
-        previousCaptions.forEach((text, idx) => {
-          const num = pageIndex - previousCaptions.length + idx + 1
-          promptParts.push(`${num}. ${text}`)
-        })
-        promptParts.push("Current page:")
-        promptParts.push(captionText)
-        promptParts.push(
-          "Illustrate the current page scene in a consistent style. Do not include any text or captions in the image."
-        )
-        prompt = promptParts.join("\n")
-      }
+      const prompt = createImagePrompt(captionText, previousCaptions, pageIndex)
 
       const res = await fetch("/api/generate-image", {
         method: "POST",
