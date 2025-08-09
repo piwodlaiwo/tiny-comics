@@ -16,7 +16,12 @@ export function createImagePrompt(
 
   lines.push(caption)
   lines.push(
-    "Create a colorful illustration for this children's story. Keep the art style consistent across pages. Do not include any text or captions."
+    [
+      "Create a vibrant cartoon-style illustration for young children.",
+      "Maintain consistent characters, settings, and themes with earlier pages.",
+      "Use bright, friendly colors and simple shapes.",
+      "Do not include any text, watermarks, or parts of this prompt in the image."
+    ].join(" ")
   )
 
   return lines.join("\n")
