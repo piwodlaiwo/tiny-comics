@@ -1,7 +1,7 @@
 import { EXAMPLE_BOOK } from "@/lib/sample-data"
 import { Book } from "@/lib/types"
 
-const KEY = "tiny-tales"
+const KEY = "tiny-comics"
 
 export function getBooks(): Book[] {
   let books: Book[] = []
